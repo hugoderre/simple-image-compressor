@@ -27,73 +27,10 @@
 <body>
 
     <div id="container">
+        <input type="number" id="delta" min="1">
         <canvas id="viewport" width="900" height="500"></canvas>
     </div>
-    <script>
-        // var pixelData = canvas.getContext('2d').getImageData(event.offsetX, event.offsetY, 1, 1).data;
-        const canvas = document.getElementById('viewport'),
-            context = canvas.getContext('2d');
-
-        base_image = new Image();
-        base_image.src = 'https://picsum.photos/900/500';
-        base_image.crossOrigin = "Anonymous";
-        base_image.onload = function () {
-
-            context.drawImage(base_image, 0, 0);
-
-            const pixelCount = canvas.width * canvas.height;
-
-            const delta = 10;
-
-            let pixelX = 0,
-                pixelY = 0,
-                blocks = [];
-            for (let i = 0; i < 4549; i++) {
-                let rSum = 0,
-                    gSum = 0,
-                    bSum = 0;
-                for (let j = 0; j < delta; j++) {
-                    // Bump x
-                    pixelX++;
-                    for (let k = 0; k < delta; k++) {
-                        // Bump y
-                        pixelY++;
-                        let p = context.getImageData(pixelX, pixelY, 1, 1).data;
-                        rSum += p[0];
-                        gSum += p[1];
-                        bSum += p[2];
-                    }
-                    pixelY -= delta;
-                }
-
-                // Average the sums to get an average color
-                rAvg = rSum / (delta * 10);
-                gAvg = gSum / (delta * 10);
-                bAvg = bSum / (delta * 10);
-                blocks.push({
-                    r: rAvg,
-                    g: gAvg,
-                    b: bAvg
-                });
-                context.fillStyle = `rgb(${rAvg}, ${gAvg}, ${bAvg})`;
-                context.fillRect(pixelX - delta, pixelY, delta, delta);
-                // Break line if the width of image is reached
-                if (pixelX > canvas.width) {
-                    pixelX = 0;
-                    pixelY += delta;
-                }
-
-            }
-        }
-
-        function randomColor() {
-            return `rgb(${randomInt(256)}, ${randomInt(256)}, ${randomInt(256)})`
-        }
-
-        function randomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>
