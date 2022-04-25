@@ -18,6 +18,9 @@
             justify-content: center;
             align-items: center;
         }
+        #delta {
+            margin: 10px;
+        }
         canvas {
             border: 1px solid black;
         }
@@ -27,7 +30,7 @@
 <body>
 
     <div id="container">
-        <input type="number" id="delta" min="1">
+        <input type="number" id="delta" min="1" placeholder="Indice de compression">
         <canvas id="viewport" width="900" height="500"></canvas>
     </div>
     <script src="main.js"></script>
