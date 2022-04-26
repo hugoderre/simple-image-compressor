@@ -11,8 +11,8 @@ base_image.onload = function () {
     const delta = parseInt(localStorage.getItem('delta')) || 5;
 
     let pixelX = 0,
-        pixelY = 0,
-        blocks = []; // Blocks of average color
+        pixelY = 0;
+
     for (let i = 0; i < (canvas.width / delta) * (canvas.height / delta); i++) {
         let rSum = 0,
             gSum = 0,
@@ -38,11 +38,6 @@ base_image.onload = function () {
         rSum = 0;
         gSum = 0;
         bSum = 0;
-        blocks.push({
-            r: rAvg,
-            g: gAvg,
-            b: bAvg
-        });
 
         // Render the block to the canvas
         context.fillStyle = `rgb(${rAvg}, ${gAvg}, ${bAvg})`;
